@@ -2,7 +2,7 @@ name: Daily System Health Check and Audit
 
 on:
   schedule:
-    - cron: "0 * * * *"
+    - cron: "* * * * *"
   workflow_dispatch:
 
 jobs:
@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository Source
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Initialize Audit Environment
         run: |
