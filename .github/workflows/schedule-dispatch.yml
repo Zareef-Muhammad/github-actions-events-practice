@@ -1,0 +1,38 @@
+name: Daily System Health Check and Audit
+
+on:
+  schedule:
+    - cron: "0 0 * * *"
+  workflow_dispatch:
+
+jobs:
+  system-audit:
+    name: Perform Automated System Audit
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository Source
+        uses: actions/checkout@v4
+
+      - name: Initialize Audit Environment
+        run: |
+          echo "Status: Starting daily automated system audit..."
+          echo "Audit Timestamp: $(date)"
+          echo "Operating System: $RUNNER_OS"
+          echo "Workflow Trigger: ${{ github.event_name }}"
+
+      - name: Execute Server Health Check
+        run: |
+          echo "--- Disk Space ---"
+          df -h
+          echo "--- Memory Usage ---"
+          free -m
+          echo "--- CPU Architecture ---"
+          lscpu | grep Architecture
+
+      - name: Generate Final Audit Report
+        run: |
+          echo "================================"
+          echo "  Audit Completed Successfully"
+          echo "  Time : $(date -u '+%Y-%m-%d %H:%M:%S') UTC"
+          echo "  Trigger : ${{ github.event_name }}"
+          echo "================================"
