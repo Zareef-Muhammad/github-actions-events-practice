@@ -2,7 +2,7 @@ name: Daily System Health Check and Audit
 
 on:
   schedule:
-    - cron: "0 0 * * *"
+    - cron: "0 * * * *"
   workflow_dispatch:
 
 jobs:
